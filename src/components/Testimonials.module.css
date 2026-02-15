@@ -1,0 +1,57 @@
+.container {
+    padding: 4rem 2rem;
+    background: var(--secondary);
+}
+
+.header {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    padding: 2rem;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.rating {
+    font-family: var(--font-mono);
+    color: var(--warning);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--foreground);
+}
+
+.author {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--subtext);
+    text-align: right;
+}

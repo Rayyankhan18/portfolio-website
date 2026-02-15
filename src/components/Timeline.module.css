@@ -1,0 +1,64 @@
+.container {
+    padding: 6rem 2rem;
+    background: var(--background);
+}
+
+.header {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateX(10px);
+}
+
+.meta {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--subtext);
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.period {
+    color: var(--warning);
+}
+
+.company {
+    font-weight: bold;
+    color: var(--foreground);
+}
+
+.role {
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--subtext);
+}

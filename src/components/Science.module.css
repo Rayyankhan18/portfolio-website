@@ -1,0 +1,59 @@
+.container {
+    padding: 6rem 2rem;
+    background: var(--background);
+}
+
+.header {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.icon {
+    font-size: 2.5rem;
+    color: var(--subtext);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+}
+
+.meta {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--subtext);
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.year {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
