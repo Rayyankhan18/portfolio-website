@@ -2,6 +2,9 @@
     padding: 8rem 2rem;
     background: var(--background);
     color: var(--foreground);
+    position: relative;
+    /* overflow: hidden; */
+    /* removed overflow hidden to allow tooltips/hovers if needed, but watch for scrollbars */
 }
 
 .header {
@@ -18,6 +21,7 @@
     letter-spacing: -0.05em;
     background: linear-gradient(to right, #fff, #999);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -37,24 +41,46 @@
 }
 
 .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Softer initial border */
     border-radius: 16px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    display: block;
+    /* Ensure it works for anchors too */
+}
+
+.spotlight {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    /* Behind content but above bg */
+}
+
+.card:hover .spotlight {
+    opacity: 1;
 }
 
 .card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 30px rgba(110, 86, 207, 0.1);
-    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.1);
 }
+
+.cardContent {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+}
+
 
 .cardHeader {
     display: flex;
@@ -73,10 +99,10 @@
     font-family: var(--font-mono);
     font-size: 0.75rem;
     padding: 0.25rem 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 99px;
     color: var(--subtext);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .arrow {
@@ -93,6 +119,7 @@
     font-size: 2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: var(--foreground);
 }
 
 .tagline {
@@ -112,7 +139,8 @@
 .large {
     grid-column: span 2;
     grid-row: span 2;
-    background: radial-gradient(circle at top right, rgba(110, 86, 207, 0.1), var(--surface));
+    /* Optional: Subtle gradient for the large card to make it pop even without hover */
+    background: radial-gradient(circle at top right, rgba(110, 86, 207, 0.05), rgba(255, 255, 255, 0.02));
 }
 
 .wide {

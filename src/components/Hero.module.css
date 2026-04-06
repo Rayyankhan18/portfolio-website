@@ -11,26 +11,13 @@
 
 .gridOverlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 100px 100px;
-    background-position: center bottom;
-    /* Align grid to look grounded */
-    opacity: 0.05;
+    inset: 0;
+    /* Premium Dot Pattern */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
     pointer-events: none;
-    mask-image: linear-gradient(to bottom, transparent, black 80%);
-}
-
-.content {
-    position: relative;
-    z-index: 10;
-    max-width: 1400px;
-    width: 100%;
-    margin: 0 auto;
+    opacity: 0.6;
 }
 
 .badge {
@@ -45,7 +32,26 @@
     border-radius: 2rem;
     margin-bottom: 2rem;
     background: rgba(39, 201, 63, 0.05);
+    position: relative;
+    overflow: hidden;
 }
+
+/* Shimmer Effect */
+.badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(39, 201, 63, 0.1),
+            transparent);
+    animation: shimmer 3s infinite;
+}
+
+
 
 .pulse {
     width: 8px;
@@ -53,7 +59,7 @@
     border-radius: 50%;
     background: var(--success);
     box-shadow: 0 0 10px var(--success);
-    animation: pulse 2s infinite;
+    /* Animation removed here, using just static glow + shimmer on badge */
 }
 
 .title {
@@ -68,6 +74,7 @@
     /* Premium Type Gradient */
     background: linear-gradient(to bottom right, #fff 30%, #666 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -129,6 +136,16 @@
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
     }
 }
 

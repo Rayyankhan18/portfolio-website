@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import styles from './Experience.module.css';
+import CreepyButton from './ui/creepy-button';
 
 const experiences = [
     {
@@ -31,14 +32,14 @@ export default function Experience() {
     return (
         <section className={styles.section}>
             <div className={styles.container}>
-                <motion.h2
-                    className={styles.title}
+                <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
+                    style={{ marginBottom: '3rem' }}
                 >
-                    CAREER HISTORY
-                </motion.h2>
+                    <CreepyButton>CAREER HISTORY</CreepyButton>
+                </motion.div>
 
                 <div className={styles.timeline}>
                     {experiences.map((exp, index) => (

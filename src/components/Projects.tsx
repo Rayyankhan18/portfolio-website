@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { ArrowUpRight, MousePointer2 } from 'lucide-react';
 import styles from './Projects.module.css';
+import { MouseEvent } from 'react';
 
 const projects = [
     {
@@ -51,6 +52,40 @@ const item = {
     show: { y: 0, opacity: 1 }
 };
 
+function SpotlightCard({ children, className, ...props }: any) {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    }
+
+    return (
+        <motion.div
+            className={`${styles.card} ${className}`}
+            onMouseMove={handleMouseMove}
+            whileHover={{ scale: 0.995 }}
+            {...props}
+        >
+            <motion.div
+                className={styles.spotlight}
+                style={{
+                    background: useMotionTemplate`
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              rgba(255, 255, 255, 0.1),
+              transparent 80%
+            )
+          `,
+                }}
+            />
+            <div className={styles.cardContent}>{children}</div>
+        </motion.div>
+    );
+}
+
 export default function Projects() {
     return (
         <section className={styles.section}>
@@ -84,29 +119,26 @@ export default function Projects() {
                         </>
                     );
 
-                    if (project.link) {
-                        return (
-                            <motion.a
-                                key={index}
-                                variants={item}
-                                className={`${styles.card} ${styles[project.size]}`}
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {cardContent}
-                            </motion.a>
-                        );
-                    }
+                    const Wrapper = project.link ? motion.a : motion.div;
+                    const props = project.link
+                        ? { href: project.link, target: "_blank", rel: "noopener noreferrer" }
+                        : {};
 
                     return (
-                        <motion.div
+                        <SpotlightCard
                             key={index}
                             variants={item}
-                            className={`${styles.card} ${styles[project.size]}`}
+                            className={styles[project.size]}
+                            {...props}
                         >
-                            {cardContent}
-                        </motion.div>
+                            {project.link ? (
+                                <a {...props} style={{ textDecoration: 'none', color: 'inherit', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    {cardContent}
+                                </a>
+                            ) : (
+                                cardContent
+                            )}
+                        </SpotlightCard>
                     );
                 })}
             </motion.div>
